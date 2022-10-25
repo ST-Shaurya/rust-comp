@@ -12,23 +12,22 @@ fn main() {
 
     let mut file = match File::open(&path) {
         Ok(file) => file,
-        Err(why) => panic!("couldn't open {}: {}", display, why)
+        Err(why) => panic!("couldn't open {}: {}", display, why),
     };
 
     let mut s = String::new();
     match file.read_to_string(&mut s) {
         Ok(_) => println!("{} Read", display),
-        Err(why) => panic!("Couldn't read {}: {}", display, why)
+        Err(why) => panic!("Couldn't read {}: {}", display, why),
     };
 
     // init the lexical analyzer
-    let mut lex_analyzer = lex::Lex{
+    let mut lex_analyzer = lex::Lex {
         cur: 0usize,
         len: 0usize,
         lineno: 0usize,
-        fstr: s
+        fstr: s,
     };
 
     parser::parse(&mut lex_analyzer);
-
 }
